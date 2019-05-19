@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>Starbucks_Capstone_notebook</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Starbucks_Capstone_notebook-Copy1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11889,7 +11889,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># read in the json files</span>
@@ -12263,14 +12263,165 @@ memory usage: 796.9+ KB
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># missings values count</span>
+<span class="n">profile</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[15]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>age                    0
+became_member_on       0
+gender              2175
+id                     0
+income              2175
+dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">min_age</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">max_age</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">median_age</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">mean_age</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># min, max, meadian, mean for income</span>
+<span class="n">min_income</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">income</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">max_income</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">income</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">median_income</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">income</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">mean_income</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">income</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># skewness along the index axis </span>
+<span class="n">skew</span> <span class="o">=</span> <span class="n">profile</span><span class="p">[[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;income&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">skew</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">skipna</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># find the kurtosis over the index axis </span>
+<span class="n">kurtosis</span> <span class="o">=</span> <span class="n">profile</span><span class="p">[[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;income&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">kurt</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">skipna</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+
+<span class="n">descriptive_stats_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Min&#39;</span><span class="p">:</span> <span class="n">min_age</span><span class="p">,</span> <span class="s1">&#39;Max&#39;</span><span class="p">:</span> <span class="n">max_age</span><span class="p">,</span>
+                                  <span class="s1">&#39;Mean&#39;</span><span class="p">:</span> <span class="n">mean_age</span><span class="p">,</span> <span class="s1">&#39;Meadian&#39;</span><span class="p">:</span> <span class="n">median_age</span><span class="p">,</span>
+                                  <span class="s1">&#39;Skew&#39;</span><span class="p">:</span> <span class="n">skew</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Kurtosis&#39;</span><span class="p">:</span> <span class="n">kurtosis</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                                  <span class="p">},</span>
+                          <span class="s1">&#39;income&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Min&#39;</span><span class="p">:</span> <span class="n">min_income</span><span class="p">,</span> <span class="s1">&#39;Max&#39;</span><span class="p">:</span> <span class="n">max_income</span><span class="p">,</span>
+                                     <span class="s1">&#39;Mean&#39;</span><span class="p">:</span> <span class="n">mean_income</span><span class="p">,</span> <span class="s1">&#39;Meadian&#39;</span><span class="p">:</span> <span class="n">median_income</span><span class="p">,</span>
+                                     <span class="s1">&#39;Skew&#39;</span><span class="p">:</span> <span class="n">skew</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Kurtosis&#39;</span><span class="p">:</span> <span class="n">kurtosis</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                                     <span class="p">}</span>
+                          <span class="p">}</span>
+
+<span class="n">descriptive_stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">descriptive_stats_dict</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+<span class="n">descriptive_stats</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[59]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Min</th>
+      <th>Max</th>
+      <th>Mean</th>
+      <th>Meadian</th>
+      <th>Skew</th>
+      <th>Kurtosis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>age</th>
+      <td>18.0</td>
+      <td>118.0</td>
+      <td>62.531412</td>
+      <td>58.0</td>
+      <td>0.761858</td>
+      <td>-0.004986</td>
+    </tr>
+    <tr>
+      <th>income</th>
+      <td>30000.0</td>
+      <td>120000.0</td>
+      <td>65404.991568</td>
+      <td>64000.0</td>
+      <td>0.402005</td>
+      <td>-0.558372</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Note:</strong></p>
 <ul>
-<li>gender and income in profile data set have missing values.</li>
-<li>became_member_on should be in date format. But it seems not useful, leave as it is. </li>
+<li>gender and income in profile data set have 2175 missing values.</li>
+<li>became_member_on should be in date format. But it seems not useful, leave as it is.</li>
+<li>Minimum age:  18, Maximum age:  118, Age median:  58.0, Age mean:  63.0</li>
+<li>Minimum income:  30000, Maximum income:  120000, income median:  64000, income mean:  65405</li>
+<li>skewedness for age: 0.76 and for income: 0.40. Both are close to zero. Hence, looks fine.</li>
+<li>Kurtosis for age: -0.004 and for income: -0.558. Both are close to zero. Hence, looks fine.</li>
 </ul>
 
 </div>
@@ -13346,7 +13497,7 @@ memory usage: 11.7+ MB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">clean_data</span><span class="p">(</span> <span class="n">profile</span><span class="p">,</span> <span class="n">transcript</span><span class="p">):</span>
@@ -13791,7 +13942,7 @@ memory usage: 11.7+ MB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create user-item matrix from profile</span>
@@ -13816,6 +13967,7 @@ memory usage: 11.7+ MB
     <span class="n">customer_data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="s1">&#39;customer_id&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
     
+    
     <span class="c1"># create columns for all the offers</span>
     <span class="k">for</span> <span class="n">offer</span> <span class="ow">in</span> <span class="n">df3</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
         <span class="n">customer_data</span><span class="p">[</span><span class="s1">&#39;offer_&#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">offer</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
@@ -13837,7 +13989,7 @@ memory usage: 11.7+ MB
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[29]:</div>
+<div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -13879,6 +14031,23 @@ memory usage: 11.7+ MB
   <tbody>
     <tr>
       <th>0</th>
+      <td>68be06ca386d4c31939f3a4f0e3dd783</td>
+      <td>118</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
       <td>0610b486422d4921ae7d2bf64640c50b</td>
       <td>55</td>
       <td>F</td>
@@ -13895,7 +14064,24 @@ memory usage: 11.7+ MB
       <td>0</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>2</th>
+      <td>38fe809add3b4fcf9315a9694bb96ff5</td>
+      <td>118</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
       <td>78afa995795e4d85b5d9ceeca43f5fef</td>
       <td>75</td>
       <td>F</td>
@@ -13912,45 +14098,11 @@ memory usage: 11.7+ MB
       <td>0</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>e2127556f4f64592b11af22de27a7932</td>
-      <td>68</td>
-      <td>M</td>
-      <td>70000.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>389bc3fa690240e798340f5a15918d5c</td>
-      <td>65</td>
-      <td>M</td>
-      <td>53000.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
       <th>4</th>
-      <td>2eeac8d8feae4a8cad5a6af0499a211d</td>
-      <td>58</td>
-      <td>M</td>
-      <td>51000.0</td>
+      <td>a03223e636434f42ac4c3df47e8bac43</td>
+      <td>118</td>
+      <td>None</td>
+      <td>NaN</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -13987,7 +14139,7 @@ memory usage: 11.7+ MB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create a function to calculate time difference (time taken in processing)</span>
@@ -14028,7 +14180,7 @@ memory usage: 11.7+ MB
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>2019-04-28 15:35:40.549705
+<pre>2019-05-18 19:23:05.866787
 </pre>
 </div>
 </div>
@@ -14080,7 +14232,7 @@ memory usage: 11.7+ MB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create a function to get seperate data set for each event [&quot;offer recieved&quot;, &quot;offer viewed&quot;,</span>
@@ -14183,7 +14335,7 @@ memory usage: 11.7+ MB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># function to get offer_id for each &quot;offer received&quot;, &quot;offer viewed&quot; and &quot;offer completed&quot; using customer_id</span>
@@ -15187,7 +15339,7 @@ memory usage: 11.7+ MB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_offer_idx</span><span class="p">(</span><span class="n">l_offer_id</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">portfolio</span><span class="p">):</span>
@@ -15220,7 +15372,7 @@ memory usage: 11.7+ MB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create function to get list of ingnored offers for targeted customer</span>
@@ -15273,13 +15425,13 @@ memory usage: 11.7+ MB
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[54]:</div>
+<div class="prompt output_prompt">Out[31]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[]</pre>
+<pre>[&#39;offer_3&#39;]</pre>
 </div>
 
 </div>
@@ -15314,12 +15466,6 @@ memory usage: 11.7+ MB
     <span class="c1"># convert recs indexes into list of offers </span>
     <span class="n">l_recs</span> <span class="o">=</span> <span class="n">recs</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
     
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    # get exclude the ignored offers from list of l_recs </span>
-<span class="sd">    if user_id != None:</span>
-<span class="sd">        ignored_offers = customer_ignored_offers(user_id)</span>
-<span class="sd">        l_recs = list(set(l_recs).difference(ignored_offers))</span>
-<span class="sd">    &#39;&#39;&#39;</span>
     
     <span class="c1"># keep only top_n recommendations</span>
     <span class="n">l_recs</span> <span class="o">=</span> <span class="n">l_recs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">top_n</span><span class="p">]</span>
@@ -15779,7 +15925,7 @@ ignored offers:  []
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[149]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generate_customer_recs_matrix</span><span class="p">():</span>
@@ -16182,7 +16328,889 @@ ignored offers:  []
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="5.-Visualization">5. Visualization<a class="anchor-link" href="#5.-Visualization">&#182;</a></h3>
+<h3 id="5.-Evaluation">5. Evaluation<a class="anchor-link" href="#5.-Evaluation">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get the user-item matrix saved in step 3.3</span>
+<span class="n">customer_offer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;customer_offer_matrix.csv&#39;</span><span class="p">)</span>
+<span class="n">customer_offer</span> <span class="o">=</span> <span class="n">customer_offer</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;age&#39;</span><span class="p">,</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span><span class="s1">&#39;income&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">customer_offer</span> <span class="o">=</span> <span class="n">customer_offer</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">customer_offer</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[6]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>offer_0</th>
+      <th>offer_1</th>
+      <th>offer_2</th>
+      <th>offer_3</th>
+      <th>offer_4</th>
+      <th>offer_5</th>
+      <th>offer_6</th>
+      <th>offer_7</th>
+      <th>offer_8</th>
+      <th>offer_9</th>
+    </tr>
+    <tr>
+      <th>customer_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0610b486422d4921ae7d2bf64640c50b</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>78afa995795e4d85b5d9ceeca43f5fef</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>e2127556f4f64592b11af22de27a7932</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>389bc3fa690240e798340f5a15918d5c</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">customer_recs_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;customer_recs_matrix.csv&quot;</span><span class="p">)</span>
+<span class="n">customer_recs_matrix</span> <span class="o">=</span> <span class="n">customer_recs_matrix</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">customer_recs_matrix</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[7]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>offer_0</th>
+      <th>offer_1</th>
+      <th>offer_2</th>
+      <th>offer_3</th>
+      <th>offer_4</th>
+      <th>offer_5</th>
+      <th>offer_6</th>
+      <th>offer_7</th>
+      <th>offer_8</th>
+      <th>offer_9</th>
+    </tr>
+    <tr>
+      <th>customer_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0610b486422d4921ae7d2bf64640c50b</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>78afa995795e4d85b5d9ceeca43f5fef</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>e2127556f4f64592b11af22de27a7932</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>389bc3fa690240e798340f5a15918d5c</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">customer_recs_matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[8]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>offer_0    6430
+offer_1    4503
+offer_2       0
+offer_3    4743
+offer_4    2994
+offer_5    8662
+offer_6    8872
+offer_7       0
+offer_8    9546
+offer_9    3185
+dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comparision_original_vs_recs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">customer_recs_matrix</span><span class="p">,</span> <span class="n">customer_offer</span><span class="p">)</span>
+<span class="n">comparision_original_vs_recs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[64]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>offer_0</th>
+      <th>offer_1</th>
+      <th>offer_2</th>
+      <th>offer_3</th>
+      <th>offer_4</th>
+      <th>offer_5</th>
+      <th>offer_6</th>
+      <th>offer_7</th>
+      <th>offer_8</th>
+      <th>offer_9</th>
+    </tr>
+    <tr>
+      <th>customer_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0610b486422d4921ae7d2bf64640c50b</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>78afa995795e4d85b5d9ceeca43f5fef</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>e2127556f4f64592b11af22de27a7932</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>389bc3fa690240e798340f5a15918d5c</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2eeac8d8feae4a8cad5a6af0499a211d</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">total_errors_original_vs_recs</span> <span class="o">=</span> <span class="n">comparision_original_vs_recs</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">total_errors_original_vs_recs</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[67]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create ignored_offers_matrix</span>
+<span class="n">ignored_offers_matrix</span> <span class="o">=</span> <span class="n">customer_offer</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">l_offers</span> <span class="o">=</span> <span class="n">ignored_offers_matrix</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    
+<span class="k">for</span> <span class="n">offer</span> <span class="ow">in</span> <span class="n">l_offers</span><span class="p">:</span>
+    <span class="n">ignored_offers_matrix</span><span class="p">[</span><span class="n">offer</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+<span class="n">customer_list</span> <span class="o">=</span> <span class="n">ignored_offers_matrix</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">calculate_time</span><span class="p">()</span>
+    
+<span class="c1"># set up progressbar</span>
+<span class="n">cnter</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">prog_bar</span> <span class="o">=</span> <span class="n">progressbar</span><span class="o">.</span><span class="n">ProgressBar</span><span class="p">(</span><span class="n">maxval</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">customer_list</span><span class="p">),</span>
+                                   <span class="n">widgets</span><span class="o">=</span><span class="p">[</span><span class="n">progressbar</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="s1">&#39;]&#39;</span><span class="p">),</span> <span class="n">progressbar</span><span class="o">.</span><span class="n">Percentage</span><span class="p">()])</span>
+<span class="n">prog_bar</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">user1</span> <span class="ow">in</span> <span class="n">customer_list</span><span class="p">:</span>
+    <span class="c1"># increment the progress bar</span>
+    <span class="n">cnter</span><span class="o">+=</span><span class="mi">1</span> 
+    <span class="n">prog_bar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cnter</span><span class="p">)</span>
+    
+    <span class="n">user1_received</span><span class="p">,</span> <span class="n">user1_viewed</span><span class="p">,</span> <span class="n">user1_completed</span> <span class="o">=</span> <span class="n">get_trans_event_df</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">transcript</span><span class="p">,</span><span class="n">user_id</span><span class="o">=</span><span class="n">user1</span><span class="p">)</span>
+
+    <span class="c1"># gets list of offer ignored by the customer</span>
+    <span class="n">user1_offers_ignored</span> <span class="o">=</span> <span class="n">customer_ignored_offers</span><span class="p">(</span><span class="n">user1</span><span class="p">,</span> <span class="n">df_recieved</span><span class="o">=</span><span class="n">user1_received</span><span class="p">,</span> 
+                                                   <span class="n">df_viewed</span><span class="o">=</span><span class="n">user1_viewed</span><span class="p">,</span> 
+                                                   <span class="n">df_completed</span><span class="o">=</span><span class="n">user1_completed</span><span class="p">)</span>
+
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">user1_offers_ignored</span><span class="p">)</span><span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">offer</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">user1_offers_ignored</span><span class="p">):</span>
+            <span class="n">ignored_offers_matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">user1</span><span class="p">,</span> <span class="n">offer</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span><span class="p">;</span>  
+    
+<span class="c1"># finish progress bar</span>
+<span class="n">prog_bar</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+
+<span class="c1"># show duration of the process</span>
+<span class="n">calculate_time</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[=========================================================================]100%</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+ Duration: 0.0 hours 11.0 minutes and 14.46 seconds.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># check ignored_offers_matrix for user &#39;868317b9be554cb18e50bc68484749a2&#39;</span>
+<span class="n">test_user_id</span> <span class="o">=</span> <span class="s1">&#39;868317b9be554cb18e50bc68484749a2&#39;</span>
+<span class="n">ignored_offers_matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_user_id</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[47]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>offer_0    0
+offer_1    0
+offer_2    0
+offer_3    1
+offer_4    0
+offer_5    1
+offer_6    0
+offer_7    0
+offer_8    0
+offer_9    1
+Name: 868317b9be554cb18e50bc68484749a2, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># check ignored offers for user &#39;868317b9be554cb18e50bc68484749a2&#39;</span>
+
+<span class="n">user1_received</span><span class="p">,</span> <span class="n">user1_viewed</span><span class="p">,</span> <span class="n">user1_completed</span> <span class="o">=</span> <span class="n">get_trans_event_df</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">transcript</span><span class="p">,</span> 
+                                                                   <span class="n">user_id</span><span class="o">=</span><span class="n">test_user_id</span><span class="p">)</span>
+<span class="n">customer_ignored_offers</span><span class="p">(</span><span class="n">test_user_id</span><span class="p">,</span> <span class="n">df_recieved</span><span class="o">=</span><span class="n">user1_received</span><span class="p">,</span> <span class="n">df_viewed</span><span class="o">=</span><span class="n">user1_viewed</span><span class="p">,</span> <span class="n">df_completed</span><span class="o">=</span><span class="n">user1_completed</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[62]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;offer_3&#39;, &#39;offer_5&#39;, &#39;offer_9&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comparision_ignored_vs_recs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">customer_recs_matrix</span><span class="p">,</span> <span class="n">ignored_offers_matrix</span><span class="p">)</span>
+<span class="n">comparision_ignored_vs_recs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[66]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>offer_0</th>
+      <th>offer_1</th>
+      <th>offer_2</th>
+      <th>offer_3</th>
+      <th>offer_4</th>
+      <th>offer_5</th>
+      <th>offer_6</th>
+      <th>offer_7</th>
+      <th>offer_8</th>
+      <th>offer_9</th>
+    </tr>
+    <tr>
+      <th>customer_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0610b486422d4921ae7d2bf64640c50b</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>78afa995795e4d85b5d9ceeca43f5fef</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>e2127556f4f64592b11af22de27a7932</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>389bc3fa690240e798340f5a15918d5c</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2eeac8d8feae4a8cad5a6af0499a211d</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ignored_offers_matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[71]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>4443</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">total_errors_ignored_vs_recs</span> <span class="o">=</span> <span class="n">comparision_ignored_vs_recs</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">total_errors_ignored_vs_recs</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[70]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>48</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Mean-Average-ERROR">Mean Average ERROR<a class="anchor-link" href="#Mean-Average-ERROR">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -16190,7 +17218,274 @@ ignored offers:  []
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="5.1-event-counts-in-transcript">5.1 event counts in transcript<a class="anchor-link" href="#5.1-event-counts-in-transcript">&#182;</a></h4>
+<p>total_errors_original_vs_recs = 'Number of offers in recommendation matrix matching with the original customer offers provided in data'</p>
+<p>total_errors_ignored_vs_recs = 'Number of offers in recommendation matrix matching with the ignored offers in ignored_offers_matrix'</p>
+<p>total_offers_in_customer_offer = 'Number of offers actually completed by customers'</p>
+<p>total_errors_original_vs_recs = comparision_original_vs_recs.sum().sum()
+total_errors_ignored_vs_recs = comparision_ignored_vs_recs.sum().sum()</p>
+<p>total_offers_in_customer_offer = customer_offer.sum().sum()</p>
+<p>MAE = (('Number of offers in recommendation matrix matching with the original customer offers provided in data')</p>
+
+<pre><code>    + ('Number of offers in recommendation matrix matching with the ignored offers in ignored_offers_matrix'))
+    / ('Number of offers actually completed by customers')
+
+</code></pre>
+<p>MAE = (total_errors_original_vs_recs + total_errors_ignored_vs_recs) / (total_offers_in_customer_offer)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate MAE (Mean Average ERROR) </span>
+<span class="n">total_errors_original_vs_recs</span> <span class="o">=</span> <span class="n">comparision_original_vs_recs</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">total_errors_ignored_vs_recs</span> <span class="o">=</span> <span class="n">comparision_ignored_vs_recs</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="n">total_offers_in_customer_offer</span> <span class="o">=</span> <span class="n">customer_offer</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+       
+<span class="n">MAE</span> <span class="o">=</span> <span class="p">(</span><span class="n">total_errors_original_vs_recs</span> <span class="o">+</span> <span class="n">total_errors_ignored_vs_recs</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">total_offers_in_customer_offer</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MAE: &#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">MAE</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MAE percentage: </span><span class="si">{:.2f}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">MAE</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>MAE:  0.002
+MAE percentage: 0.20%
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="offers-recommended-using-User-User-similarity-basis">offers recommended using User-User similarity basis<a class="anchor-link" href="#offers-recommended-using-User-User-similarity-basis">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># users with no offer completed offers</span>
+<span class="n">user_offer_counts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">user_offer_counts</span><span class="p">[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">customer_offer</span><span class="o">.</span><span class="n">index</span>
+<span class="n">user_offer_counts</span><span class="p">[</span><span class="s1">&#39;counts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">customer_offer</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">())</span>
+<span class="n">user_offer_counts</span><span class="p">[</span><span class="s1">&#39;counts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">user_offer_counts</span><span class="p">[</span><span class="s1">&#39;counts&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int16&#39;</span><span class="p">)</span>
+<span class="n">user_with_no_offer_completed</span> <span class="o">=</span> <span class="n">user_offer_counts</span><span class="p">[</span><span class="n">user_offer_counts</span><span class="o">.</span><span class="n">counts</span> <span class="o">==</span> <span class="mi">0</span><span class="p">][</span><span class="s1">&#39;customer_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">user_with_no_offer_completed</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;0610b486422d4921ae7d2bf64640c50b&#39;, &#39;78afa995795e4d85b5d9ceeca43f5fef&#39;, &#39;e2127556f4f64592b11af22de27a7932&#39;, &#39;389bc3fa690240e798340f5a15918d5c&#39;, &#39;2eeac8d8feae4a8cad5a6af0499a211d&#39;, &#39;aa4862eba776480b8bb9c68455b8c2e1&#39;, &#39;e12aeaf2d47d42479ea1c4ac3d8286c6&#39;, &#39;31dda685af34476cad5bc968bdb01c53&#39;, &#39;62cf5e10845442329191fc246e7bcea3&#39;, &#39;6445de3b47274c759400cd68131d91b4&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">total_users</span> <span class="o">=</span> <span class="n">user_offer_counts</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[82]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>14825</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[84]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">total_users_with_no_offer_completed</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">user_with_no_offer_completed</span><span class="p">)</span>
+<span class="n">total_users_with_no_offer_completed</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[84]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>3373</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Max recommendation can be made vs actual recommendations made</span>
+<span class="n">total_users</span> <span class="o">=</span> <span class="n">user_offer_counts</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">user_user_max_user_recommended</span> <span class="o">=</span> <span class="n">total_users</span> <span class="o">-</span> <span class="n">total_users_with_no_offer_completed</span>
+<span class="n">user_user_actual_user_recommended</span> <span class="o">=</span> <span class="n">total_users</span> <span class="o">-</span> <span class="n">total_users_with_no_offer_completed</span>
+<span class="n">top_n_max_user_recommended</span> <span class="o">=</span> <span class="n">total_users</span>
+<span class="n">top_n_actual_user_recommended</span> <span class="o">=</span> <span class="n">total_users_with_no_offer_completed</span>
+
+<span class="n">user_received_recs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;User-User_similarity recommendations&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Max #users can be recommended&#39;</span><span class="p">:</span> 
+                                                               <span class="n">user_user_max_user_recommended</span><span class="p">,</span>
+                                                               <span class="s1">&#39;Actual #users recommended&#39;</span><span class="p">:</span>
+                                                               <span class="n">user_user_actual_user_recommended</span>
+                                                               <span class="p">},</span>
+                      <span class="s1">&#39;Top n popular based recommendations&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Max #users can be recommended&#39;</span><span class="p">:</span> <span class="n">top_n_max_user_recommended</span><span class="p">,</span>
+                                                             <span class="s1">&#39;Actual #users recommended&#39;</span><span class="p">:</span> <span class="n">top_n_actual_user_recommended</span>
+                                                             <span class="p">}</span>
+                     <span class="p">}</span>
+
+<span class="n">user_received_recs_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">user_received_recs</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+<span class="n">user_received_recs_df</span>
+    
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[87]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Max #users can be recommended</th>
+      <th>Actual #users recommended</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Top n popular based recommendations</th>
+      <td>14825</td>
+      <td>3373</td>
+    </tr>
+    <tr>
+      <th>User-User_similarity recommendations</th>
+      <td>11452</td>
+      <td>11452</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="6.-Visualization">6. Visualization<a class="anchor-link" href="#6.-Visualization">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="6.1-event-counts-in-transcript">6.1 event counts in transcript<a class="anchor-link" href="#6.1-event-counts-in-transcript">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -16254,7 +17549,7 @@ ignored offers:  []
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="5.2-gender-counts-in-profile-data-set">5.2 gender counts in profile data set<a class="anchor-link" href="#5.2-gender-counts-in-profile-data-set">&#182;</a></h4>
+<h4 id="6.2-gender-counts-in-profile-data-set">6.2 gender counts in profile data set<a class="anchor-link" href="#6.2-gender-counts-in-profile-data-set">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -16316,7 +17611,7 @@ ignored offers:  []
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="5.3-pair-plot-age,-become_member_on-and-income">5.3 pair plot age, become_member_on and income<a class="anchor-link" href="#5.3-pair-plot-age,-become_member_on-and-income">&#182;</a></h4>
+<h4 id="6.3-pair-plot-age,-become_member_on-and-income">6.3 pair plot age, become_member_on and income<a class="anchor-link" href="#6.3-pair-plot-age,-become_member_on-and-income">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -16386,7 +17681,7 @@ ignored offers:  []
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="5.4--find-the-popular-offers-amoung-each-gender-group">5.4  find the popular offers amoung each gender group<a class="anchor-link" href="#5.4--find-the-popular-offers-amoung-each-gender-group">&#182;</a></h4>
+<h4 id="6.4--find-the-popular-offers-amoung-each-gender-group">6.4  find the popular offers amoung each gender group<a class="anchor-link" href="#6.4--find-the-popular-offers-amoung-each-gender-group">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -17097,6 +18392,18 @@ ignored offers:  []
 <li><p>"offer_5" is the most popular offer among customer having age between 18-45.</p>
 </li>
 <li>"offer_6" is the most popular offer among customer having age between 46-65+.</li>
+</ul>
+<h4 id="Interesting-and-difficult-parts">Interesting and difficult parts<a class="anchor-link" href="#Interesting-and-difficult-parts">&#182;</a></h4><ul>
+<li>The were some parts I found interesting and difficult:<ul>
+<li>"User-User Based Collaborative Filtering model" could not handle the cold start problem. That's why I choose to recommend offers using "Rank-Based Recommendations" where "User-User Based Collaborative Filtering model" could not handle. And combining these two models became our "hybrid-model". </li>
+<li>Handling the ignore offers (the offers automatically completed but never viewed by the customer). As we should not recommend the these offers to a customer if he has completed the offers with out viewing these offers. I need to handle the ignored offers in "User-User Based Collaborative Filtering model" and in "hybrid-model".</li>
+<li>Model evaluation part very intresting and difficult as well of the project. As I could not use the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_absolute_error.html">sklearn.metrics.mean_absolute_error</a> because in the above recommendation models we are recommending new offers that the customer may find interesting. So, the recommended offers meant to be different from the offers initially completed by the customers as provided in the app data. That's why for calculating the MAE I considered the recommended offer as error if it was completed by the customer already or the recommened offer was ignored by the customer already.</li>
+</ul>
+</li>
+</ul>
+<h4 id="Improvement">Improvement<a class="anchor-link" href="#Improvement">&#182;</a></h4><ul>
+<li>MAE for the hybrid-model is 0.0020. There were 48 customers were the hybrid-model made recommended offers that were already ignored by those customers. This can be brought down to zero by improving the handling of ignored offers.</li>
+<li>For further improvement "Matrix Factorization" can be compared with these models.</li>
 </ul>
 
 </div>
